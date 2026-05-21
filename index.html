@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust - Premium Eco-Tourism & Travel Journeys</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#10b981', /* Emerald accent */
+                            600: '#059669',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        sand: {
+                            100: '#fef3c7', /* Amber/Sand */
+                            500: '#f59e0b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & Lucide Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300">
+
+<!-- Fixed Top Navigation -->
+<nav class="fixed top-0 left-0 w-full z-50 glass border-b border-slate-200/50 dark:border-slate-800/50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            <!-- Logo -->
+            <div class="flex items-center gap-2 cursor-pointer" onclick="scrollToSection('home')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-emerald-600 flex items-center justify-center text-white shadow-lg shadow-brand-500/20">
+                    <i data-lucide="compass" class="w-6 h-6 animate-spin-slow"></i>
+                </div>
+                <span class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent dark:from-emerald-400 dark:to-teal-300">
+                    Wanderlust
+                </span>
+            </div>
+
+            <!-- Desktop Nav Items -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="font-medium text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-brand-400 transition-colors">Home</a>
+                <a href="#about" class="font-medium text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-brand-400 transition-colors">About Us</a>
+                <a href="#services" class="font-medium text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-brand-400 transition-colors">Services</a>
+                <a href="#calculator" class="font-medium text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-brand-400 transition-colors">Trip Planner</a>
+                <a href="#contact" class="font-medium text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-brand-400 transition-colors">Contact</a>
+            </div>
+
+            <!-- Header Action buttons -->
+            <div class="hidden md:flex items-center space-x-4">
+                <!-- Theme Toggle -->
+                <button id="themeToggleBtn" onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+                    <i data-lucide="sun" id="sunIcon" class="w-5 h-5 hidden"></i>
+                    <i data-lucide="moon" id="moonIcon" class="w-5 h-5"></i>
+                </button>
+                <a href="#contact" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-semibold transition-all shadow-md hover:shadow-lg shadow-brand-600/20 flex items-center gap-2">
+                    Book Journey <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <div class="md:hidden flex items-center gap-3">
+                <button onclick="toggleTheme()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                    <i data-lucide="sun" id="sunIconMobile" class="w-5 h-5 hidden"></i>
+                    <i data-lucide="moon" id="moonIconMobile" class="w-5 h-5"></i>
+                </button>
+                <button onclick="toggleMobileMenu()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-white">
+                    <i data-lucide="menu" id="menuOpenIcon" class="w-6 h-6"></i>
+                    <i data-lucide="x" id="menuCloseIcon" class="w-6 h-6 hidden"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation Panel -->
+    <div id="mobileMenu" class="hidden md:hidden glass border-t border-slate-200 dark:border-slate-800 animate-fadeIn">
+        <div class="px-4 pt-2 pb-6 space-y-3">
+            <a href="#home" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Home</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">About Us</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Services</a>
+            <a href="#calculator" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Trip Planner</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">Contact Us</a>
+            <div class="pt-4 border-t border-slate-200 dark:border-slate-800">
+                <a href="#contact" onclick="toggleMobileMenu()" class="w-full text-center block px-4 py-3 rounded-xl bg-brand-600 text-white font-semibold">Book Now</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section (Home) -->
+<section id="home" class="relative min-h-screen pt-20 flex items-center justify-center overflow-hidden">
+    <!-- Beautiful SVG Background graphics for clean fast load and responsiveness -->
+    <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-50/20 via-slate-50 to-white dark:from-slate-900/40 dark:via-slate-950 dark:to-slate-900"></div>
+        <!-- Decorative blurred soft blobs -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-400/20 dark:bg-emerald-500/10 rounded-full filter blur-[80px] animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-400/20 dark:bg-amber-500/10 rounded-full filter blur-[80px] animate-pulse"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Hero Information Block -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-100 dark:bg-brand-900/50 text-brand-800 dark:text-brand-300 text-sm font-semibold tracking-wide border border-brand-200 dark:border-brand-800/30">
+                <i data-lucide="sparkles" class="w-4 h-4"></i> Escape to Sustainable Wonderlands
+            </div>
+            
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight">
+                Discover Nature's <br>
+                <span class="bg-gradient-to-r from-emerald-600 via-teal-500 to-amber-500 bg-clip-text text-transparent dark:from-emerald-400 dark:to-amber-300">
+                    Untamed Paradise
+                </span>
+            </h1>
+            
+            <p class="text-lg text-slate-600 dark:text-slate-300 max-w-xl mx-auto lg:mx-0">
+                Immerse yourself in authentic, eco-friendly experiences curated to spark deep connection, mindful exploration, and unforgettable memories.
+            </p>
+
+            <!-- Hero Action Controls -->
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                <a href="#services" class="w-full sm:w-auto text-center px-8 py-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold transition-all transform hover:-translate-y-0.5 shadow-lg shadow-brand-600/25 flex items-center justify-center gap-2">
+                    Explore Eco Tours <i data-lucide="compass" class="w-5 h-5"></i>
+                </a>
+                <a href="#calculator" class="w-full sm:w-auto text-center px-8 py-4 rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-semibold transition-all border border-slate-200 dark:border-slate-700 flex items-center justify-center gap-2">
+                    <i data-lucide="calculator" class="w-5 h-5"></i> Calculate Trip Cost
+                </a>
+            </div>
+
+            <!-- Quick Metrics -->
+            <div class="grid grid-cols-3 gap-6 pt-8 border-t border-slate-200 dark:border-slate-800 max-w-md mx-auto lg:mx-0">
+                <div>
+                    <div class="text-3xl font-extrabold text-brand-600 dark:text-brand-400">12k+</div>
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Happy Explorers</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-extrabold text-brand-600 dark:text-brand-400">45+</div>
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Untouched Havens</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-extrabold text-brand-600 dark:text-brand-400">4.9★</div>
+                    <div class="text-xs text-slate-500 dark:text-slate-400 font-medium">Customer Review</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Dynamic Interactive Interactive Carousel -->
+        <div class="lg:col-span-5 relative">
+            <div class="relative mx-auto max-w-[400px] h-[480px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-800 bg-slate-200 dark:bg-slate-800">
+                <!-- Fallback rich SVG and gradient imagery to prevent bad load and guarantee visual aesthetic -->
+                <div id="heroBgImage" class="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-in-out transform scale-100" style="background-image: url('https://placehold.co/800x1200/0f172a/34d399?text=Scenic+Amazon+Expeditions');">
+                    <!-- Overlay shadow/gradient -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+                </div>
+
+                <!-- Text Overlay Content on Carousel -->
+                <div class="absolute bottom-0 left-0 w-full p-6 text-white space-y-2">
+                    <div class="flex items-center gap-2">
+                        <span id="heroImageBadge" class="px-2.5 py-1 text-xs font-bold rounded-full bg-brand-500 text-white tracking-widest uppercase">Amazon Rainforest</span>
+                    </div>
+                    <h3 id="heroImageTitle" class="text-xl font-bold">Lush Canopy & Wildlife Adventure</h3>
+                    <p id="heroImageDesc" class="text-xs text-slate-200 line-clamp-2">Wander deep into biological corridors, discover diverse wildlife, and meet dedicated local conservation guardians.</p>
+                </div>
+
+                <!-- Nav Arrow Controls -->
+                <button onclick="prevHeroSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass flex items-center justify-center text-slate-800 dark:text-white shadow hover:scale-105 transition-all">
+                    <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                </button>
+                <button onclick="nextHeroSlide()" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full glass flex items-center justify-center text-slate-800 dark:text-white shadow hover:scale-105 transition-all">
+                    <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Us Section -->
+<section id="about" class="py-24 bg-white dark:bg-slate-950 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <span class="text-brand-600 dark:text-brand-400 font-bold tracking-wider text-xs uppercase bg-brand-100 dark:bg-brand-900/30 px-3 py-1.5 rounded-full inline-block">Our True Essence</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Preserving Nature, Enabling Discovery</h2>
+            <p class="text-slate-600 dark:text-slate-400 text-lg">We bridge the gap between human curiosity and deep ecology. Every trip with Wanderlust supports local wildlife preserves and generates clean revenue for indigenous communities.</p>
+        </div>
+
+        <!-- 3 Column Feature Highlights -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <!-- Feature 1 -->
+            <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+                <div class="w-12 h-12 rounded-xl bg-brand-100 dark:bg-brand-900/50 text-brand-600 dark:text-brand-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i data-lucide="leaf" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">100% Eco-Sustainable</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">We strictly utilize local transportation, renewable-energy lodges, and respect a zero-plastic initiative on every trail.</p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+                <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Safe & Expert Guided</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Our certified wilderness guides undergo strict safety training, botanical science, and carry high-grade communication tech.</p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50 hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+                <div class="w-12 h-12 rounded-xl bg-indigo-100 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <i data-lucide="users" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Supporting Communities</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">A standard 15% of your trip ticket is directly invested in hosting villages to build schools, water wells, and clean clinics.</p>
+            </div>
+        </div>
+
+        <!-- Interactive Quote/Video Showcase Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-8 border-t border-slate-200 dark:border-slate-800">
+            <div class="lg:col-span-5 space-y-6">
+                <span class="text-xs uppercase font-extrabold tracking-widest text-brand-600 dark:text-brand-400">Word from our Founder</span>
+                <blockquote class="text-2xl font-semibold italic text-slate-800 dark:text-slate-200 leading-snug">
+                    "Our goal is not simply to let people see a beautiful place, but to change their internal climate forever."
+                </blockquote>
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white">Alistair Thorne</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Explorer & Environmental Biologist</p>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-7 bg-slate-100 dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 flex items-center gap-6">
+                <div class="w-20 h-20 rounded-xl bg-brand-600 text-white flex-shrink-0 flex items-center justify-center animate-pulse">
+                    <i data-lucide="award" class="w-10 h-10"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-1">Global Green Award Champion</h4>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Awarded first prize in Global Sustainable Tourism for pristine forest recovery models, demonstrating a successful paradigm for low-impact high-connection travel.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="py-24 bg-slate-50 dark:bg-slate-900/50 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <span class="text-brand-600 dark:text-brand-400 font-bold tracking-wider text-xs uppercase bg-brand-100 dark:bg-brand-900/30 px-3 py-1.5 rounded-full inline-block">Curated Journeys</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Our Legendary Eco-Tours</h2>
+            <p class="text-slate-600 dark:text-slate-400 text-lg">Unravel absolute beauty in carefully constructed boutique adventures that limit ecological footfalls while maximizing individual joy.</p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap justify-center items-center gap-2 mb-12">
+            <button onclick="filterTours('all')" id="tab-all" class="tour-tab px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 bg-brand-600 text-white shadow-md">All Expeditions</button>
+            <button onclick="filterTours('forest')" id="tab-forest" class="tour-tab px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700">Rainforests</button>
+            <button onclick="filterTours('ocean')" id="tab-ocean" class="tour-tab px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700">Marine & Coral</button>
+            <button onclick="filterTours('mountain')" id="tab-mountain" class="tour-tab px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700">Mountain Peaks</button>
+        </div>
+
+        <!-- Tours Grid -->
+        <div id="toursContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Tour 1 -->
+            <div class="tour-card bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-200/60 dark:border-slate-700/60 hover:shadow-2xl transition-all duration-300 group" data-category="forest">
+                <div class="relative h-56 bg-slate-100 dark:bg-slate-700 overflow-hidden">
+                    <img src="https://placehold.co/600x400/064e3b/ffffff?text=Amazon+Green+Canopy" alt="Amazon Forest" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-brand-500 text-white shadow">Sustainable Gold</div>
+                    <div class="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold bg-slate-900/80 text-white backdrop-blur flex items-center gap-1"><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i> 4.9</div>
+                </div>
+                <div class="p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-brand-600 dark:text-brand-400 tracking-wider uppercase">Amazon Basin</span>
+                        <span class="text-lg font-extrabold text-slate-800 dark:text-slate-100">$1,250 <span class="text-xs text-slate-500 font-normal">/ person</span></span>
+                    </div>
+                    <h3 class="text-xl font-bold group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Amazon Biosphere Trails</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">Stay in tree-top eco lodges, navigate biodiverse river corridors, and participate in direct replanting actions.</p>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700/60 text-xs text-slate-500 dark:text-slate-400">
+                        <span class="flex items-center gap-1"><i data-lucide="clock" class="w-4 h-4 text-emerald-500"></i> 6 Days / 5 Nights</span>
+                        <button onclick="bookTour('Amazon Biosphere Trails', 1250)" class="px-4 py-2 rounded-xl bg-brand-100 hover:bg-brand-600 hover:text-white text-brand-700 font-bold transition-all">Book Trip</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour 2 -->
+            <div class="tour-card bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-200/60 dark:border-slate-700/60 hover:shadow-2xl transition-all duration-300 group" data-category="ocean">
+                <div class="relative h-56 bg-slate-100 dark:bg-slate-700 overflow-hidden">
+                    <img src="https://placehold.co/600x400/0369a1/ffffff?text=Great+Barrier+Reef" alt="Coral Reefs" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-sky-500 text-white shadow">Marine Priority</div>
+                    <div class="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold bg-slate-900/80 text-white backdrop-blur flex items-center gap-1"><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i> 4.8</div>
+                </div>
+                <div class="p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-sky-600 dark:text-sky-400 tracking-wider uppercase">Fiji Coral Triangle</span>
+                        <span class="text-lg font-extrabold text-slate-800 dark:text-slate-100">$1,850 <span class="text-xs text-slate-500 font-normal">/ person</span></span>
+                    </div>
+                    <h3 class="text-xl font-bold group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Coral Reef Sanctuaries</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">Snorkel beside marine scientists, deploy artificial reef balls, and live on a carbon-neutral floating solar resort.</p>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700/60 text-xs text-slate-500 dark:text-slate-400">
+                        <span class="flex items-center gap-1"><i data-lucide="clock" class="w-4 h-4 text-emerald-500"></i> 7 Days / 6 Nights</span>
+                        <button onclick="bookTour('Coral Reef Sanctuaries', 1850)" class="px-4 py-2 rounded-xl bg-brand-100 hover:bg-brand-600 hover:text-white text-brand-700 font-bold transition-all">Book Trip</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour 3 -->
+            <div class="tour-card bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-slate-200/60 dark:border-slate-700/60 hover:shadow-2xl transition-all duration-300 group" data-category="mountain">
+                <div class="relative h-56 bg-slate-100 dark:bg-slate-700 overflow-hidden">
+                    <img src="https://placehold.co/600x400/475569/ffffff?text=Alps+Eco+Peak" alt="Mountains" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-white shadow">Extreme Peak</div>
+                    <div class="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold bg-slate-900/80 text-white backdrop-blur flex items-center gap-1"><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i> 5.0</div>
+                </div>
+                <div class="p-6 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-amber-600 dark:text-amber-400 tracking-wider uppercase">Swiss Alps Eco</span>
+                        <span class="text-lg font-extrabold text-slate-800 dark:text-slate-100">$2,100 <span class="text-xs text-slate-500 font-normal">/ person</span></span>
+                    </div>
+                    <h3 class="text-xl font-bold group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">Summit Glacial Wonders</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">Hike massive glacial passes, map out high-altitude warming records, and rest in classic local alpine villages.</p>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700/60 text-xs text-slate-500 dark:text-slate-400">
+                        <span class="flex items-center gap-1"><i data-lucide="clock" class="w-4 h-4 text-emerald-500"></i> 5 Days / 4 Nights</span>
+                        <button onclick="bookTour('Summit Glacial Wonders', 2100)" class="px-4 py-2 rounded-xl bg-brand-100 hover:bg-brand-600 hover:text-white text-brand-700 font-bold transition-all">Book Trip</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Trip Budget Calculator Section -->
+<section id="calculator" class="py-24 bg-white dark:bg-slate-950 relative">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-gradient-to-br from-slate-50 to-brand-50/30 dark:from-slate-900 dark:to-emerald-950/20 rounded-3xl p-8 md:p-12 border border-slate-200/60 dark:border-slate-800/60 shadow-xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Inputs -->
+                <div class="lg:col-span-7 space-y-6">
+                    <span class="text-brand-600 dark:text-brand-400 font-bold tracking-wider text-xs uppercase bg-brand-100 dark:bg-brand-900/50 px-3 py-1.5 rounded-full inline-block">Interactive Planner</span>
+                    <h2 class="text-3xl font-extrabold tracking-tight">Design & Price Your Vacation</h2>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Tweak elements on-the-fly to find the balance between ultimate adventure and ecological footprints within your target financial scope.</p>
+
+                    <div class="space-y-4 pt-4">
+                        <!-- Select Package -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-2">Select Destination Package</label>
+                            <select id="calcDest" onchange="runCalculation()" class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-all">
+                                <option value="1250">Amazon Biosphere Trails ($1,250)</option>
+                                <option value="1850">Coral Reef Sanctuaries ($1,850)</option>
+                                <option value="2100">Summit Glacial Wonders ($2,100)</option>
+                                <option value="750">Standard Wildlife Hike ($750)</option>
+                            </select>
+                        </div>
+
+                        <!-- Number of travelers -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-2">Total Companions/Travelers (<span id="calcTravelerCountVal">1</span>)</label>
+                            <input id="calcTravelers" type="range" min="1" max="15" value="1" oninput="runCalculation()" class="w-full accent-brand-500">
+                        </div>
+
+                        <!-- Add-ons -->
+                        <div class="space-y-3">
+                            <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1">Trip Enhancements & Greening</label>
+                            
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="checkbox" id="addCarbon" onchange="runCalculation()" class="rounded text-brand-600 focus:ring-brand-500 w-5 h-5 accent-brand-500">
+                                <span class="text-sm text-slate-700 dark:text-slate-300">Complete Carbon Neutralization Offset (+$50 / person)</span>
+                            </label>
+
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="checkbox" id="addGuide" onchange="runCalculation()" class="rounded text-brand-600 focus:ring-brand-500 w-5 h-5 accent-brand-500">
+                                <span class="text-sm text-slate-700 dark:text-slate-300">Private Wilderness Expedition Biologist (+$200 total)</span>
+                            </label>
+
+                            <label class="flex items-center gap-3 cursor-pointer">
+                                <input type="checkbox" id="addGear" onchange="runCalculation()" class="rounded text-brand-600 focus:ring-brand-500 w-5 h-5 accent-brand-500">
+                                <span class="text-sm text-slate-700 dark:text-slate-300">Premium Climate-Proof Gear Rental kit (+$90 / person)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Pricing Results Output Panel -->
+                <div class="lg:col-span-5 bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 flex flex-col justify-between shadow-md">
+                    <div class="space-y-4">
+                        <div class="text-center pb-4 border-b border-slate-100 dark:border-slate-700">
+                            <h3 class="font-bold text-slate-800 dark:text-white uppercase tracking-wider text-xs">Estimated Trip Ledger</h3>
+                            <p class="text-xs text-slate-400 mt-1">Updates live dynamically</p>
+                        </div>
+
+                        <div class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+                            <div class="flex justify-between">
+                                <span>Base Package Rate:</span>
+                                <span id="outBase" class="font-semibold text-slate-800 dark:text-white">$0.00</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Travelers Modifier:</span>
+                                <span id="outTravelers" class="font-semibold text-slate-800 dark:text-white">x1</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Carbon Offsets:</span>
+                                <span id="outCarbon" class="font-semibold text-slate-800 dark:text-white">$0.00</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Private Biologist:</span>
+                                <span id="outBiologist" class="font-semibold text-slate-800 dark:text-white">$0.00</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Gear Rental kit:</span>
+                                <span id="outGear" class="font-semibold text-slate-800 dark:text-white">$0.00</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-dashed border-slate-200 dark:border-slate-700 flex items-end justify-between">
+                            <div>
+                                <span class="text-xs font-bold text-slate-400 block uppercase">Total Estimated</span>
+                                <span class="text-3xl font-black text-brand-600 dark:text-brand-400" id="outTotal">$0.00</span>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-500 flex items-center gap-1"><i data-lucide="leaf" class="w-3.5 h-3.5"></i> Eco Guarantee</span>
+                        </div>
+                    </div>
+
+                    <button onclick="transferToForm()" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold transition-all shadow-md shadow-brand-600/25 mt-6 flex items-center justify-center gap-2">
+                        Pre-fill Booking Form <i data-lucide="arrow-right-circle" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonial Section -->
+<section class="py-24 bg-slate-50 dark:bg-slate-900/50 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <span class="text-xs font-bold tracking-widest text-brand-600 dark:text-brand-400 uppercase bg-brand-100 dark:bg-brand-900/30 px-3 py-1.5 rounded-full inline-block">Global Echoes</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Expeditions from their Perspective</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Testimonial 1 -->
+            <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 shadow-sm flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-1 text-amber-500">
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm italic leading-relaxed">
+                        "Unlocking Amazonian ecosystems was life-altering. The carbon offsets and eco lodges feel so clean and integrated. Alistair's guided hikes have changed how I treat daily resource consumption forever."
+                    </p>
+                </div>
+                <div class="flex items-center gap-3 pt-6 border-t border-slate-100 dark:border-slate-700/50 mt-6">
+                    <div class="w-10 h-10 rounded-full bg-indigo-500 flex items-center justify-center text-white font-bold text-xs uppercase">ML</div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 dark:text-white text-sm">Marcus Lim</h4>
+                        <p class="text-xs text-slate-400">California, USA</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 shadow-sm flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-1 text-amber-500">
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm italic leading-relaxed">
+                        "Diving next to marine conservation experts to seed deep coral nurseries in Fiji was the perfect honeymoon layout. Everything felt perfectly safe, authentic, and brilliantly premium."
+                    </p>
+                </div>
+                <div class="flex items-center gap-3 pt-6 border-t border-slate-100 dark:border-slate-700/50 mt-6">
+                    <div class="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white font-bold text-xs uppercase">EH</div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 dark:text-white text-sm">Emma & Hans</h4>
+                        <p class="text-xs text-slate-400">Munich, Germany</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 shadow-sm flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-1 text-amber-500">
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-500"></i>
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm italic leading-relaxed">
+                        "The glacial mapping system in the Alps felt highly technical. Wanderlust is for travelers who seek serious discovery without trading comfort or ethical conservation footprints."
+                    </p>
+                </div>
+                <div class="flex items-center gap-3 pt-6 border-t border-slate-100 dark:border-slate-700/50 mt-6">
+                    <div class="w-10 h-10 rounded-full bg-sky-500 flex items-center justify-center text-white font-bold text-xs uppercase">AL</div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 dark:text-white text-sm">Amélie Laurent</h4>
+                        <p class="text-xs text-slate-400">Paris, France</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Us Section -->
+<section id="contact" class="py-24 bg-white dark:bg-slate-950 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <!-- Left Info Panel -->
+            <div class="lg:col-span-5 space-y-8">
+                <div class="space-y-4">
+                    <span class="text-brand-600 dark:text-brand-400 font-bold tracking-wider text-xs uppercase bg-brand-100 dark:bg-brand-900/50 px-3 py-1.5 rounded-full inline-block">Direct Inquiries</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Let's Craft Your Escape</h2>
+                    <p class="text-slate-600 dark:text-slate-400">Reach out directly to start customizing your green itinerary. Provide dates, destinations, or ask us deep ecological questions. We are ready to respond within 12 hours.</p>
+                </div>
+
+                <!-- Contact Points -->
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-brand-50 dark:bg-brand-900/40 text-brand-600 dark:text-brand-400 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="mail" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 dark:text-white">Our Central Gmail</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">wanderlust.ecotours@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="phone-call" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 dark:text-white">Emergency Concierge</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">+1 (800) 555-ECHO (3246)</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="map-pin" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 dark:text-white">Base Camp Headquarters</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">85 Trailhead Ridge, Seattle, WA, USA</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Mode Configurator Card (Special Feature for Static Form to Gmail) -->
+                <div class="p-6 rounded-2xl bg-gradient-to-tr from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800/80 border border-slate-200 dark:border-slate-800 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-extrabold text-sm uppercase tracking-wider text-slate-700 dark:text-slate-300">Gmail Settings Panel</h4>
+                        <span class="px-2 py-1 text-[10px] font-bold uppercase rounded bg-brand-500 text-white animate-pulse">Owner Config</span>
+                    </div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Configure how client messages arrive in your Gmail inbox.</p>
+                    
+                    <div class="space-y-3">
+                        <label class="block">
+                            <span class="text-[11px] uppercase font-bold text-slate-400 block mb-1">Select Delivery Mechanism</span>
+                            <select id="formModeSelector" onchange="adjustFormAction()" class="w-full text-xs px-3 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:outline-none">
+                                <option value="interactive">Option A: Interactive Success Simulation (Pre-tested Demo)</option>
+                                <option value="mailto">Option B: Direct Gmail Launcher (Opens client Gmail draft)</option>
+                                <option value="web3forms">Option C: Direct Web3Forms API to Gmail (Runs silently in background)</option>
+                            </select>
+                        </label>
+
+                        <!-- Dynamically shown inputs based on above -->
+                        <div id="targetGmailWrapper" class="hidden">
+                            <label class="block">
+                                <span class="text-[11px] uppercase font-bold text-slate-400 block mb-1">Your Destination Gmail Address</span>
+                                <input id="targetGmailAddress" type="email" placeholder="your-agency@gmail.com" value="your-agency@gmail.com" onchange="adjustFormAction()" class="w-full text-xs px-3 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900">
+                            </label>
+                        </div>
+
+                        <div id="web3FormsKeyWrapper" class="hidden">
+                            <label class="block">
+                                <span class="text-[11px] uppercase font-bold text-slate-400 block mb-1">Web3Forms Access Key</span>
+                                <input id="web3FormsKey" type="text" placeholder="e.g. 1a2b3c4d-5e6f-7g8h..." value="" onchange="adjustFormAction()" class="w-full text-xs px-3 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900">
+                                <a href="https://web3forms.com/#start" target="_blank" class="text-[10px] text-brand-600 hover:underline mt-1 block">Get a free key instantly &rarr; (Sends to your Gmail inbox)</a>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Interactive Contact Form -->
+            <div class="lg:col-span-7 bg-slate-50 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/60 rounded-3xl p-8 shadow-xl">
+                <form id="wanderlustContactForm" onsubmit="handleFormSubmission(event)" method="POST" class="space-y-6">
+                    <!-- Hidden input for Web3Forms -->
+                    <input type="hidden" name="access_key" id="hiddenWeb3FormsInput">
+                    <input type="hidden" name="subject" value="New Wanderlust Eco-Tour Booking Inquiry">
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="clientName" class="block text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-2">Your Name</label>
+                            <div class="relative">
+                                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"><i data-lucide="user" class="w-4 h-4"></i></span>
+                                <input type="text" id="clientName" name="name" required placeholder="Alistair Trail" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-all text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="clientEmail" class="block text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-2">Email Address</label>
+                            <div class="relative">
+                                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"><i data-lucide="mail" class="w-4 h-4"></i></span>
+                                <input type="email" id="clientEmail" name="email" required placeholder="explorer@travel.com" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-all text-sm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="clientDest" class="block text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-2">Desired Destination</label>
+                            <div class="relative">
+                                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"><i data-lucide="map" class="w-4 h-4"></i></span>
+                                <select id="clientDest" name="destination" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-all text-sm appearance-none">
+                                    <option value="Amazon Biosphere Trails">Amazon Biosphere Trails ($1,250)</option>
+                                    <option value="Coral Reef Sanctuaries">Coral Reef Sanctuaries ($1,850)</option>
+                                    <option value="Summit Glacial Wonders">Summit Glacial Wonders ($2,100)</option>
+                                    <option value="General Eco Inquiry">General Inquiry / Customized Journey</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="clientCompanions" class="block text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-2">Companions Count</label>
+                            <div class="relative">
+                                <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"><i data-lucide="users" class="w-4 h-4"></i></span>
+                                <input type="number" id="clientCompanions" name="companions" min="1" max="15" value="1" class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-all text-sm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="clientMessage" class="block text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-2">Special Requests & Details</label>
+                        <textarea id="clientMessage" name="message" rows="4" placeholder="Mention any medical criteria, specific departure dates, dietary guidelines, or customized adventure modifications..." class="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-all text-sm"></textarea>
+                    </div>
+
+                    <!-- Custom Form State Loader & Info Display -->
+                    <div id="formFeedbackArea" class="hidden p-4 rounded-xl text-xs font-semibold"></div>
+
+                    <button type="submit" id="submitFormBtn" class="w-full py-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold transition-all shadow-lg shadow-brand-600/25 flex items-center justify-center gap-2">
+                        <span>Send Booking Request</span> <i data-lucide="send" class="w-5 h-5"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Toast Notification Element -->
+<div id="toastNotification" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 max-w-sm w-full p-4 rounded-2xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-2xl border border-slate-800 dark:border-slate-200 flex items-center gap-3">
+    <div class="w-10 h-10 rounded-xl bg-brand-500 text-white flex items-center justify-center flex-shrink-0">
+        <i data-lucide="check" class="w-6 h-6"></i>
+    </div>
+    <div>
+        <h4 class="font-bold text-sm" id="toastTitle">Message Dispatched!</h4>
+        <p class="text-xs text-slate-400 dark:text-slate-600 mt-0.5" id="toastMessage">Inquiry processed through direct mailer logic.</p>
+    </div>
+</div>
+
+<!-- Immersive Booking Success Modal -->
+<div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center hidden p-4">
+    <div class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm" onclick="closeSuccessModal()"></div>
+    <div class="relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 max-w-md w-full shadow-2xl animate-scaleIn text-center space-y-6">
+        <div class="w-20 h-20 rounded-2xl bg-brand-100 dark:bg-brand-900/50 text-brand-600 dark:text-brand-400 flex items-center justify-center mx-auto shadow-lg">
+            <i data-lucide="badge-check" class="w-12 h-12"></i>
+        </div>
+        <div class="space-y-2">
+            <h3 class="text-2xl font-extrabold">Inquiry Sent to Gmail</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400">
+                Excellent adventure alignment! We've simulated or dispatched your details directly to your configured Gmail account inbox.
+            </p>
+        </div>
+        
+        <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl space-y-1.5 text-xs text-left text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+            <p><strong>Lead Traveler:</strong> <span id="modalName">Marcus</span></p>
+            <p><strong>Package Target:</strong> <span id="modalDest">Amazon Biosphere Trails</span></p>
+            <p><strong>Headcount:</strong> <span id="modalCompanions">2 Travelers</span></p>
+        </div>
+
+        <button onclick="closeSuccessModal()" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold transition-all shadow">
+            Return to Explorations
+        </button>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-slate-950 text-slate-400 py-16 border-t border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
+        <!-- Brand -->
+        <div class="space-y-4">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white font-black">W</div>
+                <span class="text-xl font-extrabold tracking-tight text-white">Wanderlust</span>
+            </div>
+            <p class="text-xs leading-relaxed">Pioneering sustainable eco-tourism through localized engagement, 100% renewable initiatives, and direct nature investment projects.</p>
+        </div>
+
+        <!-- Tour Quicklinks -->
+        <div>
+            <h4 class="font-bold text-sm uppercase tracking-wider text-white mb-4">Expeditions</h4>
+            <ul class="space-y-2.5 text-xs">
+                <li><a href="#services" class="hover:text-brand-400 transition-colors">Amazon Biosphere Trails</a></li>
+                <li><a href="#services" class="hover:text-brand-400 transition-colors">Coral Reef Sanctuaries</a></li>
+                <li><a href="#services" class="hover:text-brand-400 transition-colors">Summit Glacial Wonders</a></li>
+                <li><a href="#services" class="hover:text-brand-400 transition-colors">Custom Green Expeditions</a></li>
+            </ul>
+        </div>
+
+        <!-- Informational Site Map -->
+        <div>
+            <h4 class="font-bold text-sm uppercase tracking-wider text-white mb-4">Explore More</h4>
+            <ul class="space-y-2.5 text-xs">
+                <li><a href="#home" class="hover:text-brand-400 transition-colors">Home Base Camp</a></li>
+                <li><a href="#about" class="hover:text-brand-400 transition-colors">About our Green Initiatives</a></li>
+                <li><a href="#calculator" class="hover:text-brand-400 transition-colors">Dynamic Budget Planner</a></li>
+                <li><a href="#contact" class="hover:text-brand-400 transition-colors">Direct Gmail Hub</a></li>
+            </ul>
+        </div>
+
+        <!-- Social Connections -->
+        <div class="space-y-4">
+            <h4 class="font-bold text-sm uppercase tracking-wider text-white">Global Social Connection</h4>
+            <p class="text-xs">Follow our live trail feeds and camera feeds on global nature reserves.</p>
+            <div class="flex items-center gap-3">
+                <a href="#" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                <a href="#" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                <a href="#" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                <a href="#" class="w-8 h-8 rounded-lg bg-slate-900 hover:bg-brand-600 hover:text-white flex items-center justify-center transition-colors"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-slate-900 text-center text-[11px] text-slate-600 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p>&copy; 2026 Wanderlust Eco-Tourism Ltd. All conservation practices strictly audited.</p>
+        <div class="flex gap-4">
+            <a href="#" class="hover:underline">Privacy Charter</a>
+            <a href="#" class="hover:underline">Carbon Audit Report</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // State Variables for Interactive Carousel Slides
+    const heroSlides = [
+        {
+            badge: "Amazon Rainforest",
+            title: "Lush Canopy & Wildlife Adventure",
+            desc: "Wander deep into biological corridors, discover diverse wildlife, and meet dedicated local conservation guardians.",
+            img: "https://placehold.co/800x1200/064e3b/ffffff?text=Amazon+Green+Canopy"
+        },
+        {
+            badge: "Fiji Coral Reefs",
+            title: "Ocean Sanctuary & Coral Seeding",
+            desc: "Learn reef planting alongside marine biologists, explore deep ocean trenches, and help restore endangered ecosystems.",
+            img: "https://placehold.co/800x1200/0369a1/ffffff?text=Great+Barrier+Reef"
+        },
+        {
+            badge: "Swiss Glacial Alps",
+            title: "Alpine Summit Climate Mapping",
+            desc: "Participate in real climate science mapping retreats on active snowcaps while staying in energy-positive mountain chalets.",
+            img: "https://placehold.co/800x1200/475569/ffffff?text=Alps+Eco+Peak"
+        }
+    ];
+    let currentHeroIndex = 0;
+
+    // Carousel Functions
+    function updateHeroSlide() {
+        const bg = document.getElementById('heroBgImage');
+        const badge = document.getElementById('heroImageBadge');
+        const title = document.getElementById('heroImageTitle');
+        const desc = document.getElementById('heroImageDesc');
+        
+        // Quick visual fade effect
+        bg.classList.add('opacity-0');
+        setTimeout(() => {
+            bg.style.backgroundImage = `url('${heroSlides[currentHeroIndex].img}')`;
+            badge.innerText = heroSlides[currentHeroIndex].badge;
+            title.innerText = heroSlides[currentHeroIndex].title;
+            desc.innerText = heroSlides[currentHeroIndex].desc;
+            bg.classList.remove('opacity-0');
+        }, 300);
+    }
+
+    function nextHeroSlide() {
+        currentHeroIndex = (currentHeroIndex + 1) % heroSlides.length;
+        updateHeroSlide();
+    }
+
+    function prevHeroSlide() {
+        currentHeroIndex = (currentHeroIndex - 1 + heroSlides.length) % heroSlides.length;
+        updateHeroSlide();
+    }
+
+    // Auto-advance hero carousel occasionally
+    setInterval(nextHeroSlide, 8000);
+
+    // Filter Tours
+    function filterTours(category) {
+        // Manage active states of filter tabs
+        const tabs = document.querySelectorAll('.tour-tab');
+        tabs.forEach(tab => {
+            tab.classList.remove('bg-brand-600', 'text-white', 'shadow-md');
+            tab.classList.add('bg-white', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-slate-300', 'hover:bg-slate-100', 'dark:hover:bg-slate-700');
+        });
+        
+        const activeTab = document.getElementById(`tab-${category}`);
+        if(activeTab) {
+            activeTab.classList.remove('bg-white', 'dark:bg-slate-800', 'text-slate-700', 'dark:text-slate-300', 'hover:bg-slate-100', 'dark:hover:bg-slate-700');
+            activeTab.classList.add('bg-brand-600', 'text-white', 'shadow-md');
+        }
+
+        // Filter cards
+        const cards = document.querySelectorAll('.tour-card');
+        cards.forEach(card => {
+            if (category === 'all' || card.getAttribute('data-category') === category) {
+                card.style.display = 'block';
+                card.classList.add('animate-fadeIn');
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Interactive Budget Calculator Logic
+    function runCalculation() {
+        const baseRate = parseFloat(document.getElementById('calcDest').value);
+        const travelers = parseInt(document.getElementById('calcTravelers').value);
+        
+        document.getElementById('calcTravelerCountVal').innerText = travelers;
+
+        // Fetch check values
+        const isCarbonChecked = document.getElementById('addCarbon').checked;
+        const isGuideChecked = document.getElementById('addGuide').checked;
+        const isGearChecked = document.getElementById('addGear').checked;
+
+        // Perform calculation modifiers
+        const subtotalBase = baseRate * travelers;
+        const carbonCost = isCarbonChecked ? (50 * travelers) : 0;
+        const guideCost = isGuideChecked ? 200 : 0;
+        const gearCost = isGearChecked ? (90 * travelers) : 0;
+
+        const totalCost = subtotalBase + carbonCost + guideCost + gearCost;
+
+        // Format to UI
+        document.getElementById('outBase').innerText = `$${baseRate.toLocaleString()}.00`;
+        document.getElementById('outTravelers').innerText = `x${travelers}`;
+        document.getElementById('outCarbon').innerText = `$${carbonCost.toLocaleString()}.00`;
+        document.getElementById('outBiologist').innerText = `$${guideCost.toLocaleString()}.00`;
+        document.getElementById('outGear').innerText = `$${gearCost.toLocaleString()}.00`;
+        
+        document.getElementById('outTotal').innerText = `$${totalCost.toLocaleString()}.00`;
+    }
+
+    // Transfer interactive budget calculations cleanly over to direct submission form
+    function transferToForm() {
+        const selectObj = document.getElementById('calcDest');
+        const selectedText = selectObj.options[selectObj.selectedIndex].text.split(' ($')[0];
+        const travelers = document.getElementById('calcTravelers').value;
+
+        // Find match in booking form destination list or make customizable
+        const formDest = document.getElementById('clientDest');
+        let matchedOptionFound = false;
+        for (let i = 0; i < formDest.options.length; i++) {
+            if (formDest.options[i].value.includes(selectedText) || selectedText.includes(formDest.options[i].value)) {
+                formDest.selectedIndex = i;
+                matchedOptionFound = true;
+                break;
+            }
+        }
+        if(!matchedOptionFound) {
+            formDest.value = "General Eco Inquiry";
+        }
+
+        document.getElementById('clientCompanions').value = travelers;
+        
+        // Pre-fill requests area
+        let requestsNotes = "Pre-calculated through Interactive Planner:\n";
+        if(document.getElementById('addCarbon').checked) requestsNotes += "- Carbon Offset Included\n";
+        if(document.getElementById('addGuide').checked) requestsNotes += "- Private Biologist Guided Tour Requested\n";
+        if(document.getElementById('addGear').checked) requestsNotes += "- Carbon-Proof Gear Rental Wanted\n";
+        document.getElementById('clientMessage').value = requestsNotes;
+
+        // Scroll gracefully to contact
+        scrollToSection('contact');
+        showToast('Configuration Transferred!', 'Your custom package details have been applied to the reservation form below.');
+    }
+
+    // Book Tour Directly from individual Cards
+    function bookTour(tourName, rate) {
+        const formDest = document.getElementById('clientDest');
+        for (let i = 0; i < formDest.options.length; i++) {
+            if (formDest.options[i].value.includes(tourName)) {
+                formDest.selectedIndex = i;
+                break;
+            }
+        }
+        document.getElementById('clientCompanions').value = 1;
+        document.getElementById('clientMessage').value = `Hi! I want to request booking spaces on the ${tourName} expedition at a rate of $${rate} per participant. Please check slot availability.`;
+        scrollToSection('contact');
+        showToast('Destination Selected!', `${tourName} booking parameters preloaded.`);
+    }
+
+    // Helper to scroll smoothly
+    function scrollToSection(id) {
+        const elem = document.getElementById(id);
+        if(elem) {
+            elem.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    // Theme Management (Light / Dark Modes)
+    function toggleTheme() {
+        const html = document.documentElement;
+        if (html.classList.contains('dark')) {
+            html.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+            document.getElementById('sunIcon').classList.add('hidden');
+            document.getElementById('moonIcon').classList.remove('hidden');
+            document.getElementById('sunIconMobile').classList.add('hidden');
+            document.getElementById('moonIconMobile').classList.remove('hidden');
+        } else {
+            html.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+            document.getElementById('sunIcon').classList.remove('hidden');
+            document.getElementById('moonIcon').classList.add('hidden');
+            document.getElementById('sunIconMobile').classList.remove('hidden');
+            document.getElementById('moonIconMobile').classList.add('hidden');
+        }
+    }
+
+    // On Load Setup
+    window.onload = function() {
+        // Initialize responsive Lucide Icons
+        lucide.createIcons();
+
+        // Calculate initial interactive budget fields
+        runCalculation();
+
+        // Check local storage for dark/light themes
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            document.getElementById('sunIcon').classList.remove('hidden');
+            document.getElementById('moonIcon').classList.add('hidden');
+            document.getElementById('sunIconMobile').classList.remove('hidden');
+            document.getElementById('moonIconMobile').classList.add('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.getElementById('sunIcon').classList.add('hidden');
+            document.getElementById('moonIcon').classList.remove('hidden');
+            document.getElementById('sunIconMobile').classList.add('hidden');
+            document.getElementById('moonIconMobile').classList.remove('hidden');
+        }
+    }
+
+    // Responsive Mobile Menu Drawer Toggle
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobileMenu');
+        const openIcon = document.getElementById('menuOpenIcon');
+        const closeIcon = document.getElementById('menuCloseIcon');
+
+        if(menu.classList.contains('hidden')) {
+            menu.classList.remove('hidden');
+            openIcon.classList.add('hidden');
+            closeIcon.classList.remove('hidden');
+        } else {
+            menu.classList.add('hidden');
+            openIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+        }
+    }
+
+    // Dynamic adjustment of action and delivery mechanisms based on owner-settings
+    function adjustFormAction() {
+        const form = document.getElementById('wanderlustContactForm');
+        const mode = document.getElementById('formModeSelector').value;
+        const targetGmail = document.getElementById('targetGmailAddress').value;
+        const web3Key = document.getElementById('web3FormsKey').value;
+        const feedback = document.getElementById('formFeedbackArea');
+
+        // Reset elements
+        document.getElementById('targetGmailWrapper').classList.add('hidden');
+        document.getElementById('web3FormsKeyWrapper').classList.add('hidden');
+        feedback.classList.add('hidden');
+        form.removeAttribute('action');
+
+        if (mode === 'mailto') {
+            document.getElementById('targetGmailWrapper').classList.remove('hidden');
+            feedback.className = "p-4 rounded-xl text-xs font-semibold bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-200 mt-4";
+            feedback.innerHTML = `<p><strong>Option B Mode Active:</strong> Clicking send will immediately construct your booking email and launch your Gmail client with preloaded body tags.</p>`;
+            feedback.classList.remove('hidden');
+        } 
+        else if (mode === 'web3forms') {
+            document.getElementById('web3FormsKeyWrapper').classList.remove('hidden');
+            document.getElementById('hiddenWeb3FormsInput').value = web3Key;
+            form.setAttribute('action', 'https://api.web3forms.com/submit');
+            
+            feedback.className = "p-4 rounded-xl text-xs font-semibold bg-amber-100 text-amber-800 dark:bg-amber-950/40 dark:text-amber-200 mt-4";
+            feedback.innerHTML = `<p><strong>Option C Mode Active:</strong> Ensure your Web3Forms access key is accurate. Form submission will seamlessly send messages to your email in the background.</p>`;
+            feedback.classList.remove('hidden');
+        }
+        else {
+            feedback.className = "p-4 rounded-xl text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-200 mt-4";
+            feedback.innerHTML = `<p><strong>Option A Mode Active:</strong> Preloaded interactive demo simulator is active. Click send to see simulated confirmation dialogues.</p>`;
+            feedback.classList.remove('hidden');
+        }
+    }
+
+    // Main Submit Function
+    function handleFormSubmission(event) {
+        const mode = document.getElementById('formModeSelector').value;
+        const name = document.getElementById('clientName').value;
+        const email = document.getElementById('clientEmail').value;
+        const dest = document.getElementById('clientDest').value;
+        const companions = document.getElementById('clientCompanions').value;
+        const messageText = document.getElementById('clientMessage').value;
+
+        // Validation Check
+        if (!name || !email) {
+            showToast("Incomplete Parameters", "Please provide a valid client name and email address to route messages.");
+            event.preventDefault();
+            return false;
+        }
+
+        // Option A: Demo Interactive Simulator
+        if (mode === 'interactive') {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submitFormBtn');
+            const originalContent = submitBtn.innerHTML;
+            
+            // Show premium loading spinner
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Dispatched Connecting to Ecosystem...`;
+
+            setTimeout(() => {
+                // Re-enable and reset button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalContent;
+
+                // Load Success Modal Data
+                document.getElementById('modalName').innerText = name;
+                document.getElementById('modalDest').innerText = dest;
+                document.getElementById('modalCompanions').innerText = `${companions} Travelers`;
+                
+                // Show Success Modal
+                document.getElementById('successModal').classList.remove('hidden');
+                
+                // Show floating confirmation alert toast
+                showToast("Booking Dispatched!", "Inquiry simulated successfully.");
+                
+                // Clean input fields
+                document.getElementById('wanderlustContactForm').reset();
+            }, 1500);
+        }
+        // Option B: Mailto direct link generator
+        else if (mode === 'mailto') {
+            event.preventDefault();
+            const targetGmail = document.getElementById('targetGmailAddress').value || "your-agency@gmail.com";
+            
+            // Build the deep link body
+            const subject = encodeURIComponent(`Wanderlust Eco-Tour Booking Inquiry - ${dest}`);
+            const body = encodeURIComponent(
+                `Wanderlust Booking Request Details:\n\n` +
+                `Name: ${name}\n` +
+                `Contact Email: ${email}\n` +
+                `Selected Expedition: ${dest}\n` +
+                `Number of Travelers: ${companions}\n\n` +
+                `Client Messages/Special Requirements:\n` +
+                `${messageText}\n\n` +
+                `Sent via Wanderlust Portal Static Hub.`
+            );
+
+            // Open Mailto Link
+            const mailtoUrl = `mailto:${targetGmail}?subject=${subject}&body=${body}`;
+            window.location.href = mailtoUrl;
+
+            showToast("Gmail Application Called!", "Opened draft message containing booking details.");
+        }
+        // Option C: Web3Forms background dispatch
+        else if (mode === 'web3forms') {
+            // Let the form naturally submit to API action, Web3Forms handles the redirection/success tracking.
+            const web3Key = document.getElementById('web3FormsKey').value;
+            if(!web3Key) {
+                event.preventDefault();
+                showToast("Access Key Missing!", "To dispatch background messages directly to Gmail, retrieve a free Web3Forms Access Key.");
+            } else {
+                showToast("Dispatching Email...", "Attempting transmission through API node...");
+            }
+        }
+    }
+
+    // Modal Control
+    function closeSuccessModal() {
+        document.getElementById('successModal').classList.add('hidden');
+    }
+
+    // Custom non-obtrusive dynamic Toast Notifications
+    function showToast(title, message) {
+        const toast = document.getElementById('toastNotification');
+        document.getElementById('toastTitle').innerText = title;
+        document.getElementById('toastMessage').innerText = message;
+        
+        // Slide up toast
+        toast.classList.remove('translate-y-24', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+
+        // Slide down and dismiss after delay
+        setTimeout(() => {
+            toast.classList.remove('translate-y-0', 'opacity-100');
+            toast.classList.add('translate-y-24', 'opacity-0');
+        }, 5000);
+    }
+</script>
+</body>
+</html>
